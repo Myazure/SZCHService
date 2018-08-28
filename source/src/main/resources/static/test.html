@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <title>坐标系管理</title>
+	<!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+     <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <!-- TABLE STYLES-->
+    <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand" href="javascript:void()" style="font-size: 18px">
+                    <img src="assets/img/logo-login.png" width="240px" style="margin-left: -5px; margin-top: -5px">
+                </div>
+                
+        <div id="sideNav" href="">
+        <i class="fa fa-bars icon"></i> 
+        </div>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a href="javascript:void()"><i class="fa fa-dashboard"></i> 信息化测绘管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="guanxian-list.html">管线标准</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void()">勘察标准</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void()">房产测绘标准</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void()">规划审批标准</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void()">其他测绘标准</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void()"><i class="fa fa-desktop"></i> 信息化项目管理</a>
+                    </li>
+                     
+                    <li class="active">
+                        <a class="active-menu" href="coord-list.html"><i class="fa fa-sitemap"></i> 坐标系管理</a>
+                    </li>   
+                            
+                    <li>
+                        <a href="javascript:void()"><i class="fa fa-qrcode"></i> 地图管理</a>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript:void()"><i class="fa fa-dashboard"></i> 权限管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="user-list.html">账号管理</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void()">权限分配</a>
+                            </li>
+                            <li>
+                                <a href="group.html">项目分类权限</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void()"><i class="fa fa-edit"></i> 逻辑管理</a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void()"><i class="fa fa-fw fa-file"></i> 系统帮助</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+		      <div class="header"> 
+                    <h1 class="page-header">
+                    	管线标准
+                    </h1>
+					<ol class="breadcrumb">
+					  <li><a href="index.html">首页</a></li>
+					  <li class="active">坐标系管理</a></li>
+					</ol>			
+		      </div>
+            <div id="page-inner"> 
+            	<a href="coord-add.html" class="btn btn-primary" style="float: right;">添加</a>
+                
+                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th colspan="2">产品名称</th>
+                            <th rowspan="2">功效</th>
+                            <th colspan="2">辅助用具</th>
+                            <th rowspan="2">使用方法</th>
+                        </tr>
+                        <tr>
+                            <th>文字</th>
+                            <th>图片</th>
+                            <th>文字</th>
+                            <th>图片</th>
+                        </tr>
+                    </thead>
+                </table>
+
+				<footer><p>Copyright &copy; 2017.Odeen All rights reserved.</p></footer>
+			</div>
+             <!-- /. PAGE INNER  -->
+        </div>
+         <!-- /. PAGE WRAPPER  -->
+    </div>
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Vue Js -->
+    <script src="assets/js/vue.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+    <!-- DATA TABLE SCRIPTS -->
+    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+        <script>
+            var myVue;
+            $(document).ready(function () {
+                myVue = new Vue({
+                    el: '#wrapper',
+                    data: {
+                        
+                    },
+                    methods: {
+                        
+                    }
+                });
+
+                loadCoords();
+            });
+
+            function loadCoords() {
+                $('#dataTables-example').dataTable({
+                    lengthChange: true, // 禁止用户改变每页显示条数
+                    searching: true, // 禁用用上角搜索
+                    ordering: true, // 禁用排序功能
+                    destroy: true,
+                    serverSide: true;
+                    ajax: {
+                        url: baseUrl + 'coordinate/coordinates'
+                    },
+                    columns: [
+                        {data: '清型药液'},
+                        {
+                            data: 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png',
+                            render: function(data) {
+                                return "<img src='" + data + "'>";
+                            }
+                        },
+                        {data: '什么功效'},
+                        {data: '什么工具'},
+                        {
+                            data: 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png',
+                            render: function(data) {
+                                return "<img src='" + data + "'>";
+                            }
+                        },
+                        {data: '怎么使用'}
+                    ],
+                    language: language,
+                });
+
+                $('#dataTables-example tbody').on('click', 'a#edit', function(){
+                    var data = $('#dataTables-example').DataTable().row($(this).parents('tr')).data();
+                    location.href = 'coord-add.html?id=' + data.id +
+                    '&coordinatename=' + data.coordinatename + 
+                    '&a=' + data.a +
+                    '&f=' + data.f +
+                    '&L_mid=' + data.l_mid + 
+                    '&BO=' + data.b0 +
+                    '&dN=' + data.dN +
+                    '&dE=' + data.dE +
+                    '&dX=' + data.dX +
+                    '&dY=' + data.dY + 
+                    '&dZ=' + data.dZ +
+                    '&RX=' + data.rx +
+                    '&RY=' + data.ry +
+                    '&RZ=' + data.rz +
+                    '&K=' + data.k;
+                });
+
+                $('#dataTables-example tbody').on('click', 'a#delete', function(){
+                    var data = $('#dataTables-example').DataTable().row($(this).parents('tr')).data();
+                    $.ajax({
+                        url: baseUrl + 'coordinate/deleteCoordinate',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        success: function(data) {
+                            if (data.ret_num == 0) {
+                                loadCoords();
+                                alert('删除成功');
+                            }else {
+                                alert(data.ret_message);
+                            }
+                        },
+                        error: function(e) {
+                            alert(e.status + ' ' + e.statusText);
+                        }
+                    });
+                });
+            }
+    </script>
+      <!-- Custom Js -->
+    <script src="assets/js/custom-scripts.js"></script>
+    
+   
+</body>
+</html>

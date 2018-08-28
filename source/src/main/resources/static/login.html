@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <title>登录</title>
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+     <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <!-- TABLE STYLES-->
+    <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <style type="text/css">
+    	.header {
+    		height: 100px;
+    		margin-top: 20px;
+    		margin-left: 30px;
+    	}
+    	.header img {
+    		height: 77px;
+    	}
+    	.header span {
+    		position: absolute;
+    		margin-top: 22px;
+    		font-size: 25px;
+    		color: rgb(150,150,150);
+    	}
+    	.content {
+    		position: relative;
+    		background-image: url(assets/img/bg-login.png);
+    		background-position: center;
+    		height: 650px;
+    	}
+    	.content .panel {
+    		padding: 10px;
+    		background-color: white;
+			width: 320px;
+			height: 380px;
+			position: absolute;
+			top: 135px;
+			right: 100px;
+    	}
+    	.content .panel .a {
+    		font-size: 14px;
+    		text-decoration: underline;
+    	}
+    	.content .panel .label {
+    		font-size: 14px;
+    		color: rgb(100,100,100);
+    	}
+    	.content .panel .input {
+    		border-radius: 3px;
+    	}
+    	.footer {
+    		text-align: center;
+    		margin-top: 30px;
+    	}
+    </style>
+</head>
+
+<body style="background-color: white">
+	<div class="header">
+		<div>
+			<img src="assets/img/logo-login.png"><span>&nbsp;| 欢迎登录</span>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="panel">
+			<div style="text-align:right;width:100%"><a href="#">忘记密码?</a></div>
+			<br><br>
+			<label>用户名</label>
+			<br>
+			<input type="text" class="form-control" name="username" id="username">
+			<br>
+			<label>密码</label>
+			<br>
+			<input type="password" class="form-control" name="password" id="password">
+			<br><br>
+			<button class="btn btn-primary" onclick="login()" style="display: inline-block;width:100%">登录</button>
+		</div>
+	</div>
+
+	<div class="footer">
+		Copyright &copy; 2017.Odeen All rights reserved.
+	</div>
+
+	<!-- jQuery Js -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Vue Js -->
+    <script src="assets/js/vue.js"></script>
+	<script type="text/javascript">
+		function login() {
+            var username = $("input[name='username']").val();
+            var password = $("input[name='password']").val();
+            if (isNull(username) || isNull(password)) {
+                alert("用户名或密码为空");
+                return;
+            }
+            if (username == 'admin' && password == '654321') {
+                location.href = 'guanxian-list.html';
+                return;
+            }
+            $.ajax({
+                url: baseUrl + 'user/login',
+                type: 'post',
+                data: {
+                    name: username,
+                    password: password,
+                },
+                success: function(data) {
+                    if (data.ret_num == 0) {
+                        location.href = 'guanxian-list.html';
+                    }else {
+                        alert(data.ret_message);
+                    }
+                },
+                error: function(e) {
+                    alert(e.status + ' ' + e.statusText);
+                }
+            });
+		}
+	</script>
+    <!-- Custom Js -->
+    <script src="assets/js/custom-scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <title>添加坐标系</title>
+	<!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+     <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <!-- TABLE STYLES-->
+    <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand" href="javascript:void()" style="font-size: 18px">
+                    <img src="assets/img/logo-login.png" width="240px" style="margin-left: -5px; margin-top: -5px">
+                </div>
+                
+        <div id="sideNav" href="">
+        <i class="fa fa-bars icon"></i> 
+        </div>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a href="javascript:void()"><i class="fa fa-dashboard"></i> 信息化测绘管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="guanxian-list.html">管线标准</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void()">勘察标准</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void()">房产测绘标准</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void()">规划审批标准</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void()">其他测绘标准</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void()"><i class="fa fa-desktop"></i> 信息化项目管理</a>
+                    </li>
+                     
+                    <li class="active">
+                        <a class="active-menu" href="coord-list.html"><i class="fa fa-sitemap"></i> 坐标系管理</a>
+                    </li>   
+                            
+                    <li>
+                        <a href="javascript:void()"><i class="fa fa-qrcode"></i> 地图管理</a>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript:void()"><i class="fa fa-dashboard"></i> 权限管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="user-list.html">账号管理</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void()">权限分配</a>
+                            </li>
+                            <li>
+                                <a href="group.html">项目分类权限</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void()"><i class="fa fa-edit"></i> 逻辑管理</a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void()"><i class="fa fa-fw fa-file"></i> 系统帮助</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+		      <div class="header"> 
+                    <h1 class="page-header">
+                    	管线标准
+                    </h1>
+					<ol class="breadcrumb">
+					  <li><a href="index.html">首页</a></li>
+                      <li><a href="coord-list.html">坐标系管理</a></li>
+					  <li class="active">{{title}}</a></li>
+					</ol>			
+		      </div>
+            <div id="page-inner"> 
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-2" style="line-height: 34px">坐标系名称</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="coordinatename" v-model="coordinatename">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px">
+                        <div class="col-sm-2" style="line-height: 34px">参考椭球长半轴 a=</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="a" v-model="a">
+                        </div>
+                        <div class="col-sm-2" style="line-height: 34px">X平移(m)</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="dX" v-model="dX">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px">
+                        <div class="col-sm-2" style="line-height: 34px">参考椭球扁率 f=</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="f" v-model="f">
+                        </div>
+                        <div class="col-sm-2" style="line-height: 34px">Y平移(m)</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="dY" v-model="dY">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px">
+                        <div class="col-sm-2" style="line-height: 34px">中央子午线(DMS)</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="L_mid" v-model="L_mid">
+                        </div>
+                        <div class="col-sm-2" style="line-height: 34px">Z平移(m)</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="dZ" v-model="dZ">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px">
+                        <div class="col-sm-2" style="line-height: 34px">原点纬度BO(DMS)</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="BO" v-model="BO">
+                        </div>
+                        <div class="col-sm-2" style="line-height: 34px">X轴旋转(")</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="RX" v-model="RX">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px">
+                        <div class="col-sm-2" style="line-height: 34px">北加常数</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="dN" v-model="dN">
+                        </div>
+                        <div class="col-sm-2" style="line-height: 34px">Y轴旋转(")</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="RY" v-model="RY">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px">
+                        <div class="col-sm-2" style="line-height: 34px">东加常数</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="dE" v-model="dE">
+                        </div>
+                        <div class="col-sm-2" style="line-height: 34px">Z轴旋转(")</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="RZ" v-model="RZ">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px">
+                        <div class="col-sm-2" style="line-height: 34px">尺度(ppm)</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="K" v-model="K">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="margin-top: 15px;margin-left: 15px" @click="submit">确定</button>
+
+				<footer><p>Copyright &copy; 2017.Odeen All rights reserved.</p></footer>
+			</div>
+             <!-- /. PAGE INNER  -->
+        </div>
+         <!-- /. PAGE WRAPPER  -->
+    </div>
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Vue Js -->
+    <script src="assets/js/vue.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+    <!-- DATA TABLE SCRIPTS -->
+    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+        <script>
+            var myVue;
+            $(document).ready(function () {
+                document.title = isNull(QueryString.id) ? '新增坐标系' : '编辑坐标系';
+
+                myVue = new Vue({
+                    el: '#wrapper',
+                    data: {
+                        coordinatename: QueryString.coordinatename,
+                        a: QueryString.a,
+                        f: QueryString.f,
+                        L_mid: QueryString.L_mid,
+                        BO: QueryString.BO,
+                        dN: QueryString.dN,
+                        dE: QueryString.dE,
+                        dX: QueryString.dX,
+                        dY: QueryString.dY,
+                        dZ: QueryString.dZ,
+                        RX: QueryString.RX,
+                        RY: QueryString.RY,
+                        RZ: QueryString.RZ,
+                        K: QueryString.K
+                    },
+                    computed: {
+                        title: function() {
+                            return isNull(QueryString.id) ? '新增坐标系' : '编辑坐标系';
+                        },
+                    },
+                    methods: {
+                        submit: function() {
+                            var data = this.$data;
+                            if (isNull(QueryString.id)) { // 新增
+                                $.ajax({
+                                    url: baseUrl + 'coordinate/addCoordinate',
+                                    type: 'post',
+                                    data: data,
+                                    success: function(data) {
+                                        if (data.ret_num == 0) {
+                                            history.go(-1);
+                                        }else {
+                                            alert(data.ret_message);
+                                        }
+                                    },
+                                    error: function(e) {
+                                        alert(e.status + ' ' + e.statusText);
+                                    }
+                                });
+                            }else { // 修改
+                                data.id = QueryString.id;
+                                $.ajax({
+                                    url: baseUrl + 'coordinate/updateCoordinate',
+                                    type: 'post',
+                                    data: data,
+                                    success: function(data) {
+                                        if (data.ret_num == 0) {
+                                            history.go(-1);
+                                        }else {
+                                            alert(data.ret_message);
+                                        }
+                                    },
+                                    error: function(e) {
+                                        alert(e.status + ' ' + e.statusText);
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+            });
+
+    </script>
+      <!-- Custom Js -->
+    <script src="assets/js/custom-scripts.js"></script>
+    
+   
+</body>
+</html>
