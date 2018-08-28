@@ -1,0 +1,32 @@
+server.port:8888
+servlet.container.maxThreads: 10
+spring.datasource.url: jdbc: jdbc:mysql://localhost:3306/database?useUnicode=true&characterEncoding=UTF-8
+spring.datasource.username:  username
+spring.datasource.password:  password
+spring.datasource.testWhileIdle: true
+spring.datasource.validationQuery: SELECT 1
+spring.jpa.show-sql: false
+spring.jpa.hibernate.ddl-auto: validate
+spring.jpa.properties.hibernate.show_sql:false
+spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+spring.jpa.useSSL:false
+security.user.name:  
+security.user.password:  
+management.security.role: SUPERUSER
+management.context-path: /manage
+
+mail.smtp.auth=true
+mail.host= 
+mail.transport.protocol=smtp
+mail.smtp.auth.username= 
+mail.smtp.auth.password= 
+mail.alert.recievers=
+
+weixin.compAppId:  
+weixin.compAppSecret:  
+encode.token:  
+encode.key:  
+weixin.id: 
+
+ 
+ 
