@@ -2,11 +2,11 @@ package org.myazure.repository;
 
 import java.util.List;
 
-import org.myazure.domain.User;
+import org.myazure.entity.User;
 
 
 
-public interface IUserDao {
+public interface UserRepository {
 	
 	public List<User> getAllUser();	
 	

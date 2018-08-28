@@ -1,4 +1,4 @@
-package org.myazure.controller;
+package org.myazure.szzh.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,40 +14,42 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-import org.myazure.repository.ICityDao;
-import org.myazure.repository.ILayoutAreaDao;
-import org.myazure.repository.ILayoutCityDao;
-import org.myazure.repository.ILayoutLineDao;
-import org.myazure.repository.ILayoutPointDao;
-import org.myazure.domain.AreaParam;
-import org.myazure.domain.AreaParamSet;
-import org.myazure.domain.City;
-import org.myazure.domain.Layout;
-import org.myazure.domain.LayoutArea;
-import org.myazure.domain.LayoutCategory;
-import org.myazure.domain.LayoutCity;
-import org.myazure.domain.LayoutLine;
-import org.myazure.domain.LayoutPoint;
-import org.myazure.domain.LineParam;
-import org.myazure.domain.LineParamSet;
-import org.myazure.domain.PointParam;
-import org.myazure.domain.PointParamSet;
+
+import org.myazure.repository.CityRepository;
+import org.myazure.repository.LayoutAreaRepository;
+import org.myazure.repository.LayoutCityRepository;
+import org.myazure.repository.LayoutLineRepository;
+import org.myazure.repository.LayoutPointRepository;
+import org.myazure.entity.AreaParam;
+import org.myazure.entity.AreaParamSet;
+import org.myazure.entity.City;
+import org.myazure.entity.Layout;
+import org.myazure.entity.LayoutArea;
+import org.myazure.entity.LayoutCategory;
+import org.myazure.entity.LayoutCity;
+import org.myazure.entity.LayoutLine;
+import org.myazure.entity.LayoutPoint;
+import org.myazure.entity.LineParam;
+import org.myazure.entity.LineParamSet;
+import org.myazure.entity.PointParam;
+import org.myazure.entity.PointParamSet;
 
 
 @Controller  
 @RequestMapping("/city") 
 public class CityController {
 	@Resource  
-    private ICityDao cityDao; 
+    private CityRepository cityRepository; 
 	@Resource  
-    private ILayoutCityDao layoutCityDao; 
+    private LayoutCityRepository layoutCityRepository; 
 	@Resource 
-	private ILayoutPointDao layoutPointDao;
+	private LayoutPointRepository layoutPointRepository;
 	@Resource 
-	private ILayoutLineDao layoutLineDao;
+	private LayoutLineRepository layoutLineRepository;
 	@Resource 
-	private ILayoutAreaDao layoutAreaDao;
-    private int ret_num = 0;
+	private LayoutAreaRepository layoutAreaRepository;
+  
+	private int ret_num = 0;
     private int ret_error = -1;
     private String ret_message="";
 	
@@ -78,14 +80,14 @@ public class CityController {
     		city.setCreated_at(new Date());
     		city.setCreater(creater);
     		
-        	List<City> cities = cityDao.geCities(city);
+        	List<City> cities = cityRepository.geCities(city);
         	if(cities!=null && cities.size()>0){
         		ret_message = "该标准名称已存在";
         		object.put("ret_num", ret_error);
         		object.put("ret_message", ret_message);
                 return object;  
         	}
-    		cityDao.insertCity(city);
+    		cityRepository.insertCity(city);
     		object.put("city_id", city.getCity_id());
     	}catch (Exception e) {
 			// TODO: handle exception
@@ -130,7 +132,7 @@ public class CityController {
     		city.setCity_name(name);
     		city.setCreater(creater);
     		
-        	List<City> cities = cityDao.geCities(city);
+        	List<City> cities = cityRepository.geCities(city);
         	if(cities!=null && cities.size()>0){
         		City existCity = cities.get(0);
         		if(existCity.getCity_id()!=city_id){
@@ -140,7 +142,7 @@ public class CityController {
 	                return object; 
         		}
         	}
-    		cityDao.updateCity(city);
+    		cityRepository.updateCity(city);
     	}catch (Exception e) {
 			// TODO: handle exception
     		e.printStackTrace();
@@ -171,13 +173,13 @@ public class CityController {
     		page=1;
     	}
     	int index = (page-1)*10;
-    	int count = cityDao.cityCount();
+    	int count = cityRepository.cityCount();
     	int page_num = count/10+(count%10)==0?0:1;
     	
     	
     	
     	JSONObject object  = new JSONObject();
-    	List<City> cities = cityDao.getCityByPage(index);
+    	List<City> cities = cityRepository.getCityByPage(index);
         object.put("ret_num", ret_num);
 		object.put("ret_message", "success");
         object.put("data", cities);
@@ -212,42 +214,42 @@ public class CityController {
     		city.setCity_name(name);
     		city.setCreated_at(new Date());
     		city.setCreater(creater);    		
-        	List<City> cities = cityDao.geCities(city);
+        	List<City> cities = cityRepository.geCities(city);
         	if(cities!=null && cities.size()>0){
         		ret_message = "该标准名称已存在";
         		object.put("ret_num", ret_error);
         		object.put("ret_message", ret_message);
                 return object;  
         	}
-    		cityDao.insertCity(city);    
+    		cityRepository.insertCity(city);    
 
     		//图层
-        	List<LayoutCategory> layoutCategories = layoutCityDao.getLayoutCategoryByCid(city_id);
+        	List<LayoutCategory> layoutCategories = layoutCityRepository.getLayoutCategoryByCid(city_id);
         	if(layoutCategories!=null && layoutCategories.size()>0){
         		for(LayoutCategory layoutCategory:layoutCategories){
             		int father_category = layoutCategory.getId();
             		layoutCategory.setCity_id(city.getCity_id());        
-                	layoutCityDao.insertLayoutCategory(layoutCategory);            	
+                	layoutCityRepository.insertLayoutCategory(layoutCategory);            	
                 	LayoutCity layout_city = new LayoutCity(); 
             		layout_city.setCity_id(city.getCity_id());
             		layout_city.setLayout_category_id(layoutCategory.getId());
-            		layoutCityDao.insertLayoutCity(layout_city);        		
-            		List<Layout> layouts= layoutCityDao.selectLayoutByCategory(father_category);
+            		layoutCityRepository.insertLayoutCity(layout_city);        		
+            		List<Layout> layouts= layoutCityRepository.selectLayoutByCategory(father_category);
             		if(layouts!=null && layouts.size()>0){
 	            		for(Layout layout:layouts){
-	            			Layout newLayout = layoutCityDao.getLayoutByLid(layout.getLayout_id());
+	            			Layout newLayout = layoutCityRepository.getLayoutByLid(layout.getLayout_id());
 	            			newLayout.setFather_category(layoutCategory.getId());
 	            			newLayout.setLayout_name(layout.getLayout_name());	                    	
 	                    	newLayout.setLayout_code(layout.getLayout_code());
 	                    	newLayout.setCity_id(city.getCity_id());
-	                		layoutCityDao.insertLayout(newLayout);
+	                		layoutCityRepository.insertLayout(newLayout);
 	                		//管点
-	                		LayoutPoint layoutPoint = layoutPointDao.selectPointByLayout(layout.getLayout_id());
+	                		LayoutPoint layoutPoint = layoutPointRepository.selectPointByLayout(layout.getLayout_id());
 	                		LayoutPoint newLayoutPoint = new LayoutPoint();
 	                		newLayoutPoint.setFather_layout(newLayout.getLayout_id());
 	                		newLayoutPoint.setPoint_pic(layoutPoint.getPoint_pic());   		
-	                		layoutPointDao.insertLayoutPoint(newLayoutPoint);   		
-	                    	List<PointParam> pointParams = layoutPointDao.getPointParamsByPoint(layoutPoint.getPoint_id());  	
+	                		layoutPointRepository.insertLayoutPoint(newLayoutPoint);   		
+	                    	List<PointParam> pointParams = layoutPointRepository.getPointParamsByPoint(layoutPoint.getPoint_id());  	
 	                    	if(pointParams!=null && pointParams.size()>0){
 //	                    		for(PointParam pointParam:pointParams){
 //	                    			int point_paramid = pointParam.getPoint_paramid();
@@ -280,13 +282,13 @@ public class CityController {
 	                    			int point_paramid = pointParam.getPoint_paramid();
 	                    			pointParam.setFather_point(newLayoutPoint.getPoint_id());
 	                    			pointParam.setFather_param(0);
-	                    			layoutPointDao.addPointParam(pointParam);
+	                    			layoutPointRepository.addPointParam(pointParam);
 	                            	if(pointParam.getIs_select()==1){
-	                            		List<PointParamSet> pointParamSets = layoutPointDao.getPointParamSetsByParamId(point_paramid);
+	                            		List<PointParamSet> pointParamSets = layoutPointRepository.getPointParamSetsByParamId(point_paramid);
 	                            		for(PointParamSet pointParamSet:pointParamSets){
 	                            			pointParamSet.setPoint_paramid(pointParam.getPoint_paramid());
 //	                            			pointParamSet.setPic_path("");
-	                            			layoutPointDao.addPointParamSet(pointParamSet);
+	                            			layoutPointRepository.addPointParamSet(pointParamSet);
 	                            		}
 	                           		
 	                            	}               	
@@ -296,13 +298,13 @@ public class CityController {
 	            	                		int paramid = param.getPoint_paramid();
 	            	                		param.setFather_point(newLayoutPoint.getPoint_id());
 	            	                		param.setFather_param(pointParam.getPoint_paramid());
-	            	            			layoutPointDao.addPointParam(param);
+	            	            			layoutPointRepository.addPointParam(param);
 	            	                    	if(param.getIs_select()==1){
-	            	                    		List<PointParamSet> pointParamSets = layoutPointDao.getPointParamSetsByParamId(paramid);
+	            	                    		List<PointParamSet> pointParamSets = layoutPointRepository.getPointParamSetsByParamId(paramid);
 	            	                    		for(PointParamSet pointParamSet:pointParamSets){
 	            	                    			pointParamSet.setPoint_paramid(param.getPoint_paramid());
 //	            	                    			pointParamSet.setPic_path("");
-	            	                    			layoutPointDao.addPointParamSet(pointParamSet);
+	            	                    			layoutPointRepository.addPointParamSet(pointParamSet);
 	            	                    		}
 	            	                   		
 	            	                    	}
@@ -311,12 +313,12 @@ public class CityController {
 	                    		}
 	                		}
 	                		//管线
-	                		LayoutLine layoutLine = layoutLineDao.selectLineByLayout(layout.getLayout_id());
+	                		LayoutLine layoutLine = layoutLineRepository.selectLineByLayout(layout.getLayout_id());
 	                		LayoutLine newLayoutLine = new LayoutLine();
 	                		newLayoutLine.setFather_layout(newLayout.getLayout_id());
 	                		newLayoutLine.setLine_color(layoutLine.getLine_color());    		
-	                		layoutLineDao.insertLayoutLine(newLayoutLine);   		
-	                    	List<LineParam> lineParams = layoutLineDao.getLineParamsByLine(layoutLine.getLine_id());  	
+	                		layoutLineRepository.insertLayoutLine(newLayoutLine);   		
+	                    	List<LineParam> lineParams = layoutLineRepository.getLineParamsByLine(layoutLine.getLine_id());  	
 	                    	if(lineParams!=null && lineParams.size()>0){
 //	                    		for(LineParam lineParam:lineParams){
 //	                    			int line_paramid = lineParam.getLine_paramid();
@@ -347,12 +349,12 @@ public class CityController {
 	                    			int line_paramid = lineParam.getLine_paramid();
 	                    			lineParam.setFather_line(newLayoutLine.getLine_id());
 	                    			lineParam.setFather_param(0);
-	                    			layoutLineDao.addLineParam(lineParam);
+	                    			layoutLineRepository.addLineParam(lineParam);
 	                            	if(lineParam.getIs_select()==1){
-	                            		List<LineParamSet> lineParamSets = layoutLineDao.getLineParamSetsByParamId(line_paramid);
+	                            		List<LineParamSet> lineParamSets = layoutLineRepository.getLineParamSetsByParamId(line_paramid);
 	                            		for(LineParamSet lineParamSet:lineParamSets){
 	                            			lineParamSet.setLine_paramid(lineParam.getLine_paramid());
-	                            			layoutLineDao.addLineParamSet(lineParamSet);
+	                            			layoutLineRepository.addLineParamSet(lineParamSet);
 	                            		}
 	                           		
 	                            	}
@@ -362,12 +364,12 @@ public class CityController {
 	                                		int paramid = param.getLine_paramid();
 	                                		param.setFather_line(newLayoutLine.getLine_id());
 	                                		param.setFather_param(lineParam.getLine_paramid());
-	                                		layoutLineDao.addLineParam(param);
+	                                		layoutLineRepository.addLineParam(param);
 	                                    	if(param.getIs_select()==1){
-	                                    		List<LineParamSet> lineParamSets = layoutLineDao.getLineParamSetsByParamId(paramid);
+	                                    		List<LineParamSet> lineParamSets = layoutLineRepository.getLineParamSetsByParamId(paramid);
 	                                    		for(LineParamSet lineParamSet:lineParamSets){
 	                                    			lineParamSet.setLine_paramid(param.getLine_paramid());
-	                                    			layoutLineDao.addLineParamSet(lineParamSet);
+	                                    			layoutLineRepository.addLineParamSet(lineParamSet);
 	                                    		}
 	                                   		
 	                                    	}
@@ -376,12 +378,12 @@ public class CityController {
 	                    		}
 	                		}
 	                		//范围    
-	                		LayoutArea layoutArea = layoutAreaDao.selectAreaByLayout(layout.getLayout_id());
+	                		LayoutArea layoutArea = layoutAreaRepository.selectAreaByLayout(layout.getLayout_id());
 	                		LayoutArea newLayoutArea = new LayoutArea();
 	                		newLayoutArea.setFather_layout(newLayout.getLayout_id());
 	                		newLayoutArea.setArea_color(layoutArea.getArea_color());    		
-	                		layoutAreaDao.insertLayoutArea(newLayoutArea);   		
-	                    	List<AreaParam> areaParams = layoutAreaDao.getAreaParamsByArea(layoutArea.getArea_id());  	
+	                		layoutAreaRepository.insertLayoutArea(newLayoutArea);   		
+	                    	List<AreaParam> areaParams = layoutAreaRepository.getAreaParamsByArea(layoutArea.getArea_id());  	
 	                    	if(areaParams!=null && areaParams.size()>0){
 //	                    		for(AreaParam areaParam:areaParams){
 //	                    			int area_paramid = areaParam.getArea_paramid();
@@ -413,12 +415,12 @@ public class CityController {
 	                    			int area_paramid = areaParam.getArea_paramid();
 	                    			areaParam.setFather_area(newLayoutArea.getArea_id());
 	                    			areaParam.setFather_param(0);
-	                            	layoutAreaDao.addAreaParam(areaParam);
+	                            	layoutAreaRepository.addAreaParam(areaParam);
 	                            	if(areaParam.getIs_select()==1){
-	                            		List<AreaParamSet> areaParamSets = layoutAreaDao.getAreaParamSetsByParamId(area_paramid);
+	                            		List<AreaParamSet> areaParamSets = layoutAreaRepository.getAreaParamSetsByParamId(area_paramid);
 	                            		for(AreaParamSet areaParamSet:areaParamSets){
 	                            			areaParamSet.setArea_paramid(areaParam.getArea_paramid());
-	                            			layoutAreaDao.addAreaParamSet(areaParamSet);
+	                            			layoutAreaRepository.addAreaParamSet(areaParamSet);
 	                            		}
 	                           		
 	                            	}
@@ -429,12 +431,12 @@ public class CityController {
 	                            			int paramid = param.getArea_paramid();
 	                            			param.setFather_area(newLayoutArea.getArea_id());
 	                            			param.setFather_param(areaParam.getArea_paramid());
-	                                    	layoutAreaDao.addAreaParam(param);
+	                                    	layoutAreaRepository.addAreaParam(param);
 	                                    	if(param.getIs_select()==1){
-	                                    		List<AreaParamSet> areaParamSets = layoutAreaDao.getAreaParamSetsByParamId(paramid);
+	                                    		List<AreaParamSet> areaParamSets = layoutAreaRepository.getAreaParamSetsByParamId(paramid);
 	                                    		for(AreaParamSet areaParamSet:areaParamSets){
 	                                    			areaParamSet.setArea_paramid(param.getArea_paramid());
-	                                    			layoutAreaDao.addAreaParamSet(areaParamSet);
+	                                    			layoutAreaRepository.addAreaParamSet(areaParamSet);
 	                                    		}
 	                                   		
 	                                    	}
@@ -475,53 +477,53 @@ public class CityController {
     		int city_id = Integer.parseInt(request.getParameter("city_id")); 
     		
     		//图层
-        	List<LayoutCategory> layoutCategories = layoutCityDao.getLayoutCategoryByCid(city_id);
+        	List<LayoutCategory> layoutCategories = layoutCityRepository.getLayoutCategoryByCid(city_id);
         	if(layoutCategories!=null && layoutCategories.size()>0){
         		for(LayoutCategory layoutCategory:layoutCategories){
         			int id = layoutCategory.getId();
-        			List<Layout> layouts= layoutCityDao.selectLayoutByCategory(id);
+        			List<Layout> layouts= layoutCityRepository.selectLayoutByCategory(id);
             		if(layouts!=null && layouts.size()>0){
                 		for(Layout layout:layouts){
         		    		//管点
-        		    		LayoutPoint layoutPoint = layoutPointDao.selectPointByLayout(layout.getLayout_id());  		
-        		        	List<PointParam> pointParams = layoutPointDao.getPointParamsByPoint(layoutPoint.getPoint_id());  	
+        		    		LayoutPoint layoutPoint = layoutPointRepository.selectPointByLayout(layout.getLayout_id());  		
+        		        	List<PointParam> pointParams = layoutPointRepository.getPointParamsByPoint(layoutPoint.getPoint_id());  	
         		        	if(pointParams!=null && pointParams.size()>0){
         		        		for(PointParam pointParam:pointParams){
         		        			int point_paramid = pointParam.getPoint_paramid();
-        		        			layoutPointDao.deletePointParamByParamId(point_paramid);       
-        		                	layoutPointDao.deletePointParamSetByParamId(point_paramid); 
+        		        			layoutPointRepository.deletePointParamByParamId(point_paramid);       
+        		                	layoutPointRepository.deletePointParamSetByParamId(point_paramid); 
         		        		}        		        		 
         		    		}
-        		        	layoutPointDao.deletePointByPointId(layoutPoint.getPoint_id());    	
+        		        	layoutPointRepository.deletePointByPointId(layoutPoint.getPoint_id());    	
         		    		//管线
-        		    		LayoutLine layoutLine = layoutLineDao.selectLineByLayout(layout.getLayout_id());  		
-        		        	List<LineParam> lineParams = layoutLineDao.getLineParamsByLine(layoutLine.getLine_id());  	
+        		    		LayoutLine layoutLine = layoutLineRepository.selectLineByLayout(layout.getLayout_id());  		
+        		        	List<LineParam> lineParams = layoutLineRepository.getLineParamsByLine(layoutLine.getLine_id());  	
         		        	if(lineParams!=null && lineParams.size()>0){
         		        		for(LineParam lineParam:lineParams){
         		        			int line_paramid = lineParam.getLine_paramid();
-        		        			layoutLineDao.deleteLineParamByParamId(line_paramid);       
-        		        			layoutLineDao.deleteLineParamSetByParamId(line_paramid); 
+        		        			layoutLineRepository.deleteLineParamByParamId(line_paramid);       
+        		        			layoutLineRepository.deleteLineParamSetByParamId(line_paramid); 
         		        		}        		        		 
         		    		}
-        		        	layoutLineDao.deleteLineByLineId(layoutLine.getLine_id());  
+        		        	layoutLineRepository.deleteLineByLineId(layoutLine.getLine_id());  
         		    		//范围    
-        		    		LayoutArea layoutArea = layoutAreaDao.selectAreaByLayout(layout.getLayout_id());  		
-        		        	List<AreaParam> areaParams = layoutAreaDao.getAreaParamsByArea(layoutArea.getArea_id());  	
+        		    		LayoutArea layoutArea = layoutAreaRepository.selectAreaByLayout(layout.getLayout_id());  		
+        		        	List<AreaParam> areaParams = layoutAreaRepository.getAreaParamsByArea(layoutArea.getArea_id());  	
         		        	if(areaParams!=null && areaParams.size()>0){
         		        		for(AreaParam areaParam:areaParams){
         		        			int area_paramid = areaParam.getArea_paramid();
-        		        			layoutAreaDao.deleteAreaParamByParamId(area_paramid);       
-        		        			layoutAreaDao.deleteAreaParamSetByParamId(area_paramid); 
+        		        			layoutAreaRepository.deleteAreaParamByParamId(area_paramid);       
+        		        			layoutAreaRepository.deleteAreaParamSetByParamId(area_paramid); 
         		        		}        		        		 
         		    		}    
-        		        	layoutAreaDao.deleteAreaByAreaId(layoutArea.getArea_id());        	
-        		        	layoutCityDao.deleteLayoutByLayoutId(layout.getLayout_id());       
+        		        	layoutAreaRepository.deleteAreaByAreaId(layoutArea.getArea_id());        	
+        		        	layoutCityRepository.deleteLayoutByLayoutId(layout.getLayout_id());       
                 		}
             		}
-            		layoutCityDao.deleteLayoutCategoryById(id);
+            		layoutCityRepository.deleteLayoutCategoryById(id);
         		}
         	}
-    		cityDao.deleteCityByCityId(city_id);
+    		cityRepository.deleteCityByCityId(city_id);
     		
     		
     	}catch (Exception e) {

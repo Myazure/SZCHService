@@ -2,12 +2,12 @@ package org.myazure.repository;
 
 import java.util.List;
 
-import org.myazure.domain.LayoutPoint;
-import org.myazure.domain.PointParam;
-import org.myazure.domain.PointParamSet;
+import org.myazure.entity.LayoutPoint;
+import org.myazure.entity.PointParam;
+import org.myazure.entity.PointParamSet;
 
 
-public interface ILayoutPointDao {
+public interface LayoutPointRepository {
 	
 	
 	public void insertLayoutPoint(LayoutPoint layoutPoint);

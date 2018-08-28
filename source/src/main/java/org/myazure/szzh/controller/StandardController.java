@@ -1,4 +1,4 @@
-package org.myazure.controller;
+package org.myazure.szzh.controller;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -15,16 +15,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-import org.myazure.repository.IStandardDao;
-import org.myazure.domain.Standard;
-import org.myazure.domain.User;
+
+import org.myazure.repository.StandardRepository;
+import org.myazure.entity.Standard;
+import org.myazure.entity.User;
 
 
 @Controller  
 @RequestMapping("/standard") 
 public class StandardController {
 	@Resource  
-    private IStandardDao standardDao; 
+    private StandardRepository standardDao; 
     private int ret_num = 0;
     private int ret_error = -1;
     private String ret_message="";

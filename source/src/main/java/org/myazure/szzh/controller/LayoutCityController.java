@@ -1,8 +1,9 @@
-package org.myazure.controller;
+package org.myazure.szzh.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 
 import javax.annotation.Resource;
@@ -16,35 +17,36 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.myazure.repository.ILayoutAreaDao;
-import org.myazure.repository.ILayoutCityDao;
-import org.myazure.repository.ILayoutLineDao;
-import org.myazure.repository.ILayoutPointDao;
-import org.myazure.domain.AreaParam;
-import org.myazure.domain.AreaParamSet;
-import org.myazure.domain.Layout;
-import org.myazure.domain.LayoutArea;
-import org.myazure.domain.LayoutCategory;
-import org.myazure.domain.LayoutCity;
-import org.myazure.domain.LayoutLine;
-import org.myazure.domain.LayoutPoint;
-import org.myazure.domain.LineParam;
-import org.myazure.domain.LineParamSet;
-import org.myazure.domain.PointParam;
-import org.myazure.domain.PointParamSet;
+
+import org.myazure.repository.LayoutAreaRepository;
+import org.myazure.repository.LayoutCityRepository;
+import org.myazure.repository.LayoutLineRepository;
+import org.myazure.repository.LayoutPointRepository;
+import org.myazure.entity.AreaParam;
+import org.myazure.entity.AreaParamSet;
+import org.myazure.entity.Layout;
+import org.myazure.entity.LayoutArea;
+import org.myazure.entity.LayoutCategory;
+import org.myazure.entity.LayoutCity;
+import org.myazure.entity.LayoutLine;
+import org.myazure.entity.LayoutPoint;
+import org.myazure.entity.LineParam;
+import org.myazure.entity.LineParamSet;
+import org.myazure.entity.PointParam;
+import org.myazure.entity.PointParamSet;
 
 
 @Controller  
 @RequestMapping("/layout_city") 
 public class LayoutCityController {
 	@Resource  
-    private ILayoutCityDao layoutCityDao; 
+    private LayoutCityRepository layoutCityDao; 
 	@Resource 
-	private ILayoutPointDao layoutPointDao;
+	private LayoutPointRepository layoutPointDao;
 	@Resource 
-	private ILayoutLineDao layoutLineDao;
+	private LayoutLineRepository layoutLineDao;
 	@Resource 
-	private ILayoutAreaDao layoutAreaDao;
+	private LayoutAreaRepository layoutAreaDao;
     private int ret_num = 0;
     private int ret_error = -1;
     private String ret_message="";

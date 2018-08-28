@@ -1,4 +1,4 @@
-package org.myazure.controller;
+package org.myazure.szzh.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,17 +19,18 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.myazure.repository.ILayoutPointDao;
-import org.myazure.domain.LayoutPoint;
-import org.myazure.domain.PointParam;
-import org.myazure.domain.PointParamSet;
-import org.myazure.domain.PointSetModel;
+
+import org.myazure.repository.LayoutPointRepository;
+import org.myazure.entity.LayoutPoint;
+import org.myazure.entity.PointParam;
+import org.myazure.entity.PointParamSet;
+import org.myazure.entity.PointSetModel;
 
 @Controller  
 @RequestMapping("/layout_point") 
 public class LayoutPointController {
 	@Resource  
-    private ILayoutPointDao layoutPointDao; 
+    private LayoutPointRepository layoutPointDao; 
     private int ret_num = 0;
     private int ret_error = -1;
     private String ret_message="";

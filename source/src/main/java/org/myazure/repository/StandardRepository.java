@@ -3,11 +3,11 @@ package org.myazure.repository;
 import java.util.List;
 import java.util.Map;
 
-import org.myazure.domain.Standard;
+import org.myazure.entity.Standard;
 
 
 
-public interface IStandardDao {
+public interface StandardRepository {
 
 	
 	public	void insertStandard(Standard standard);

@@ -1,4 +1,4 @@
-package org.myazure.controller;
+package org.myazure.szzh.controller;
 
 import java.util.List;
 
@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-import org.myazure.repository.IRoleDao;
-import org.myazure.domain.RoleGroup;
+
+import org.myazure.repository.RoleRepository;
+import org.myazure.entity.RoleGroup;
 
 
 
@@ -22,7 +23,7 @@ import org.myazure.domain.RoleGroup;
 @RequestMapping("/role")  
 public class RoleController {  
     @Resource  
-    private IRoleDao roleDao; 
+    private RoleRepository roleDao; 
     private int ret_num = 0;
     private int ret_error = -1;
     private String ret_message="";

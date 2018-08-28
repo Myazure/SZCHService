@@ -1,4 +1,4 @@
-package org.myazure.controller;
+package org.myazure.szzh.controller;
 
 import java.util.Date;
 import java.util.List;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 
-import org.myazure.repository.IUserDao;
+import org.myazure.repository.UserRepository;
 import org.myazure.utils.Base64;
-import org.myazure.domain.User;
+import org.myazure.entity.User;
 
 
 
@@ -25,7 +25,7 @@ import org.myazure.domain.User;
 @RequestMapping("/user")  
 public class UserController {  
     @Resource  
-    private IUserDao userDao; 
+    private UserRepository userDao; 
     private int ret_num = 0;
     private int ret_error = 1;
       

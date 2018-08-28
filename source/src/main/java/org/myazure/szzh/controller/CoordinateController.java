@@ -1,4 +1,4 @@
-package org.myazure.controller;
+package org.myazure.szzh.controller;
 
 import java.util.List;
 
@@ -12,15 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-import org.myazure.repository.ICoordinateDao;
-import org.myazure.domain.Coordinate;
+
+import org.myazure.repository.CoordinateRepository;
+import org.myazure.entity.Coordinate;
 
 
 @Controller  
 @RequestMapping("/coordinate") 
 public class CoordinateController {
 	@Resource 
-	private ICoordinateDao coordinateDao;
+	private CoordinateRepository coordinateDao;
     private int ret_num = 0;
     private int ret_error = -1;
     private String ret_message="";

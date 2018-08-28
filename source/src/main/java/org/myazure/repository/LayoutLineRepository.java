@@ -2,13 +2,13 @@ package org.myazure.repository;
 
 import java.util.List;
 
-import org.myazure.domain.LayoutLine;
-import org.myazure.domain.LineParam;
-import org.myazure.domain.LineParamSet;
+import org.myazure.entity.LayoutLine;
+import org.myazure.entity.LineParam;
+import org.myazure.entity.LineParamSet;
 
 
 
-public interface ILayoutLineDao {
+public interface LayoutLineRepository {
 	
 	
 	public void insertLayoutLine(LayoutLine layoutLine);

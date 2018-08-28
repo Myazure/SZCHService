@@ -2,12 +2,12 @@ package org.myazure.repository;
 
 import java.util.List;
 
-import org.myazure.domain.City;
+import org.myazure.entity.City;
 
 
 
 
-public interface ICityDao {
+public interface CityRepository {
 	
 	public List<City> getAllCity();	
 	

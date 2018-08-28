@@ -2,11 +2,11 @@ package org.myazure.repository;
 
 import java.util.List;
 
-import org.myazure.domain.RoleGroup;
+import org.myazure.entity.RoleGroup;
 
 
 
-public interface IRoleDao {
+public interface RoleRepository {
 	
 	public List<RoleGroup> getAllRoleGroups();	
 	

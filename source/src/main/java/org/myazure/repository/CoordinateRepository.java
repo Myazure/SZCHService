@@ -2,9 +2,9 @@ package org.myazure.repository;
 
 import java.util.List;
 
-import org.myazure.domain.Coordinate;
+import org.myazure.entity.Coordinate;
 
-public interface ICoordinateDao {
+public interface CoordinateRepository {
 	public void insertCoordinate(Coordinate coordinate);
 	
 	public void updateCoordinate(Coordinate coordinate);

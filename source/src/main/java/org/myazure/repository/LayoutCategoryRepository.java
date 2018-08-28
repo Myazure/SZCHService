@@ -2,13 +2,13 @@ package org.myazure.repository;
 
 import java.util.List;
 
-import org.myazure.domain.LayoutCategory;
+import org.myazure.entity.LayoutCategory;
 
 
 
 
 
-public interface ILayoutCategoryDao {
+public interface LayoutCategoryRepository {
 	
 	public List<LayoutCategory> getLayoutCategoryByFid(int father_id);	
 	

@@ -1,4 +1,4 @@
-package org.myazure.controller;
+package org.myazure.szzh.controller;
 
 import java.util.List;
 
@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.myazure.repository.ILayoutAreaDao;
-import org.myazure.domain.AreaParam;
-import org.myazure.domain.AreaParamSet;
-import org.myazure.domain.AreaSetModel;
-import org.myazure.domain.LayoutArea;
+
+import org.myazure.repository.LayoutAreaRepository;
+import org.myazure.entity.AreaParam;
+import org.myazure.entity.AreaParamSet;
+import org.myazure.entity.AreaSetModel;
+import org.myazure.entity.LayoutArea;
 
 
 
@@ -26,7 +27,7 @@ import org.myazure.domain.LayoutArea;
 @RequestMapping("/layout_area") 
 public class LayoutAreaController {
 	@Resource  
-    private ILayoutAreaDao layoutAreaDao; 
+    private LayoutAreaRepository layoutAreaDao; 
     private int ret_num = 0;
     private int ret_error = -1;
     private String ret_message="";

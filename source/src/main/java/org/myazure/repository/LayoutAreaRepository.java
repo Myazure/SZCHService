@@ -2,12 +2,12 @@ package org.myazure.repository;
 
 import java.util.List;
 
-import org.myazure.domain.AreaParam;
-import org.myazure.domain.AreaParamSet;
-import org.myazure.domain.LayoutArea;
+import org.myazure.entity.AreaParam;
+import org.myazure.entity.AreaParamSet;
+import org.myazure.entity.LayoutArea;
 
 
-public interface ILayoutAreaDao {
+public interface LayoutAreaRepository {
 	
 	
 	public void insertLayoutArea(LayoutArea layoutArea);

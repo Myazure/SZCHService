@@ -1,4 +1,4 @@
-package org.myazure.controller;
+package org.myazure.szzh.controller;
 
 import java.util.List;
 
@@ -13,18 +13,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.myazure.repository.ILayoutLineDao;
-import org.myazure.domain.LayoutLine;
-import org.myazure.domain.LineParam;
-import org.myazure.domain.LineParamSet;
-import org.myazure.domain.LineSetModel;
+
+import org.myazure.repository.LayoutLineRepository;
+import org.myazure.entity.LayoutLine;
+import org.myazure.entity.LineParam;
+import org.myazure.entity.LineParamSet;
+import org.myazure.entity.LineSetModel;
 
 
 @Controller  
 @RequestMapping("/layout_line") 
 public class LayoutLineController {
 	@Resource  
-    private ILayoutLineDao layoutLineDao; 
+    private LayoutLineRepository layoutLineDao; 
     private int ret_num = 0;
     private int ret_error = -1;
     private String ret_message="";

@@ -2,14 +2,14 @@ package org.myazure.repository;
 
 import java.util.List;
 
-import org.myazure.domain.Layout;
-import org.myazure.domain.LayoutCategory;
-import org.myazure.domain.LayoutCity;
+import org.myazure.entity.Layout;
+import org.myazure.entity.LayoutCategory;
+import org.myazure.entity.LayoutCity;
 
 
 
 
-public interface ILayoutCityDao {
+public interface LayoutCityRepository {
 	
 	public List<LayoutCategory> getLayoutCategoryByCid(int city_id);	
 	
