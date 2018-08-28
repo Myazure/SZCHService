@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.milestone.mygeo.dao.IUserDao">
+
+    
+    <select id="getAllUser"  resultType="User">
+		select u.*,r.group_name,r.role_type from user u left join role_group r on u.group_id = r.group_id
+    </select>
+    
+
+    
+    <insert id="insertUser" parameterType="User">
+        <!-- oracle等不支持id自增长的，可根据其id生成策略，先获取id 
+        
+     <selectKey resultType="int" order="BEFORE" keyProperty="id">
+           select seq_user_id.nextval as id from dual
+     </selectKey>
+     
+     --> 
+     
+     <!-- mysql插入数据后，获取id 
+        <selectKey keyProperty="id" resultType="int" order="AFTER" >
+               SELECT LAST_INSERT_ID() as id
+           </selectKey>  
+           
+           -->
+        insert into user(name, password ,created_at, updated_at,imei, group_id, is_admin) 
+            values(#{name}, #{password}, #{created_at}, #{updated_at}, #{imei}, #{group_id}, #{is_admin})
+	</insert>
+	
+	
+	<update id="updateUser" parameterType="User" >  
+	    update user  
+	    <set >  
+	    <if test="name != null" >  
+	        name = #{name},  
+	      </if> 
+	      <if test="password != null" >  
+	        password = #{password},  
+	      </if>  
+	      <if test="imei != null" >  
+	        imei = #{imei},  
+	      </if> 
+	      <if test="updated_at != null" >  
+	        updated_at = #{updated_at},  
+	      </if>  
+	      <if test="group_id != 0" >  
+	        group_id = #{group_id},  
+	      </if>   
+	      <if test="is_admin != -1" >  
+	        is_admin = #{is_admin},  
+	      </if>         
+	    </set>  
+	    where id = #{id}  
+	</update>
+	
+	
+	<delete id="deleteUserById" parameterType="int">
+        delete from user where id=#{id}
+    </delete>
+    
+    <select id="getUserByName"  resultType="User">
+		select u.*,r.group_name,r.role_type from user u left join role_group r on u.group_id = r.group_id where name = #{name}
+    </select>
+    
+    
+</mapper>
+

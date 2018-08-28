@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.milestone.mygeo.dao.ILayoutLineDao">
+  
+    <insert id="insertLayoutLine" parameterType="LayoutLine">
+     insert into layout_line(father_layout,line_color) 
+            values(#{father_layout},#{line_color})
+     
+        <selectKey keyProperty="line_id" resultType="int" order="AFTER" >
+			SELECT LAST_INSERT_ID()
+		</selectKey>  
+	</insert>
+	
+	<insert id="addLineParamList" useGeneratedKeys="true" parameterType="java.util.List">  
+	     
+	    insert into line_param (father_line, param_name, param_code ,param_type, is_input, is_select, is_must, is_light, is_memory, remark, param_length,father_param,is_operate,order_num)   
+	    values  
+	    <foreach collection="list" item="LineParam" index="index" separator="," >  
+	        (#{LineParam.father_line}, #{LineParam.param_name}, #{LineParam.param_code}, #{LineParam.param_type}, #{LineParam.is_input}, #{LineParam.is_select}, #{LineParam.is_must}, #{LineParam.is_light}, #{LineParam.is_memory}, #{LineParam.remark}, #{LineParam.param_length}, #{LineParam.father_param}, #{LineParam.is_operate}, #{LineParam.order_num})
+	    </foreach>  
+	</insert> 
+	
+	<update id="updateLayoutLine" parameterType="LayoutLine" >  
+	    update layout_line  
+	    <set >  
+	      <if test="line_color != null" >  
+	        line_color = #{line_color},  
+	      </if>              
+	    </set>  
+	    where line_id = #{line_id}  
+	</update>
+	
+	
+	<select id="selectLineByLayout"  resultType="LayoutLine" parameterType="int">
+		select * from layout_line where father_layout = #{father_layout} and is_del=0
+    </select>
+	
+	
+	<select id="getLineParams"  resultType="LineParam" parameterType="LineParam">
+		select * from line_param where father_line = #{father_line} and (param_name = #{param_name} or param_code = #{param_code}) and is_del=0
+    </select>
+    
+    
+    <insert id="addLineParam"  parameterType="LineParam">  
+	     
+	    insert into line_param (father_line, param_name, param_code ,param_type, is_input, is_select, is_must, is_light, is_memory, remark, param_length, father_param,is_operate,order_num)   
+	    	values  (#{father_line}, #{param_name}, #{param_code}, #{param_type}, #{is_input}, #{is_select}, #{is_must}, #{is_light}, #{is_memory}, #{remark}, #{param_length}, #{father_param}, #{is_operate}, #{order_num})
+ 		<selectKey keyProperty="line_paramid" resultType="int" order="AFTER" >
+			SELECT LAST_INSERT_ID()
+		</selectKey> 
+	</insert> 
+	
+	<update id="updateLineParam" parameterType="LineParam" >  
+	    update line_param  
+	    <set >  
+	      <if test="param_name != null" >  
+	        param_name = #{param_name},  
+	      </if>   
+	      <if test="param_code != null" >  
+	        param_code = #{param_code},  
+	      </if>    
+	      param_type = #{param_type},  
+	      is_input = #{is_input},  
+	      is_select = #{is_select},  
+	      is_must = #{is_must},
+	      is_light = #{is_light},  
+	      is_memory = #{is_memory},  
+	      remark = #{remark},  
+	      param_length = #{param_length},   
+	      father_param = #{father_param},         
+	    </set>  
+	    where line_paramid = #{line_paramid}  
+	</update>
+	
+	
+	<select id="getLineParamsByLine"  resultType="LineParam" parameterType="int">
+		select * from line_param where father_line = #{father_line} and is_del=0 order by order_num
+    </select>
+    
+    
+    
+    <insert id="addLineParamSet" parameterType="LineParamSet">
+     insert into line_param_set(line_paramid,name,value) 
+            values(#{line_paramid},#{name},#{value}) 
+        <selectKey keyProperty="id" resultType="int" order="AFTER" >
+			SELECT LAST_INSERT_ID()
+		</selectKey>  
+	</insert>
+    
+	
+    <update id="updateLineParamSet" parameterType="LineParamSet" >  
+	    update line_param_set  
+	    <set >  
+	      <if test="name != null" >  
+	        name = #{name},  
+	      </if>   
+	      <if test="value != null" >  
+	        value = #{value},  
+	      </if>              
+	    </set>  
+	    where id = #{id}  
+	</update>
+	
+		
+	<select id="getLineParamSetsByParamId"  resultType="LineParamSet" parameterType="int">
+		select * from line_param_set where line_paramid = #{line_paramid} and is_del=0
+    </select>
+    
+    <select id="getLineParamByParamId"  resultType="LineParam" parameterType="int">
+		select * from line_param where line_paramid = #{line_paramid} and is_del=0
+    </select>
+    
+    
+    <update id="deleteLineParamSetById"  parameterType="int" >
+		update line_param_set set is_del=1 where id = #{id} 
+    </update>
+    
+	<update id="deleteLineParamByParamId"  parameterType="int" >
+		update line_param set is_del=1 where line_paramid = #{line_paramid} 
+    </update>
+    
+    <update id="deleteLineParamSetByParamId"  parameterType="int" >
+		update line_param_set set is_del=1 where line_paramid = #{line_paramid} 
+    </update>
+    
+    <update id="deleteLineByLineId"  parameterType="int" >
+		update layout_line set is_del=1 where line_id = #{line_id} 
+    </update>
+    
+    <update id="updateLineParamOrderUp"  parameterType="LineParam" >
+		update line_param set order_num = order_num-1 where father_line = #{father_line} and is_del=0 and order_num > #{order_num} 
+    </update>
+    
+    <update id="updateLineParamOrder"  parameterType="LineParam" >
+		update line_param set order_num = #{order_num} where line_paramid = #{line_paramid} 
+    </update>
+</mapper>
+

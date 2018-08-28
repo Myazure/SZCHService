@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.milestone.mygeo.dao.IRoleDao">
+
+    
+    <select id="getAllRoleGroups"  resultType="RoleGroup">
+		select * from role_group where is_del=0
+    </select>
+    
+	<select id="geRoleGroups"  resultType="RoleGroup" parameterType="RoleGroup">
+		select * from role_group where group_name = #{group_name} and is_del=0
+    </select>
+    
+    <insert id="insertRoleGroup" parameterType="RoleGroup">
+        insert into role_group(group_name,role_type) 
+            values(#{group_name},#{role_type})
+            
+        <selectKey keyProperty="group_id" resultType="int" order="AFTER" >
+			SELECT LAST_INSERT_ID()
+		</selectKey> 
+	</insert>
+	
+	
+	<update id="updateRoleGroup" parameterType="RoleGroup" >  
+	    update role_group  
+	    <set >  
+	      <if test="group_name != null" >  
+	        group_name = #{group_name},  
+	      </if> 
+	      <if test="role_type != null" >  
+	        role_type = #{role_type},  
+	      </if>   
+	    </set>  
+	    where group_id = #{group_id}  
+	</update>
+	
+    
+
+    <update id="deleteRoleGroupById"  parameterType="int" >
+		update role_group set is_del=1 where group_id = #{group_id} 
+    </update>
+    
+</mapper>
+
