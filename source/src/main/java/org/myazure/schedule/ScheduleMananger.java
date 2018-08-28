@@ -17,37 +17,37 @@ public class ScheduleMananger {
 
 	@Scheduled(cron = "0/1 * *  * * ? ")
 	protected void secScanner() {
-		LOG.debug("secScanner");
+		LOG.debug("secScanner"+System.currentTimeMillis());
 	}
 
 	@Scheduled(cron = "0/30 * *  * * ? ")
 	protected void thirtySecScanner() {
-		LOG.debug("thirtySecScanner");
+		LOG.debug("thirtySecScanner"+System.currentTimeMillis());
 	}
 
 	@Scheduled(cron = "0 0/1 *  * * ? ")
 	protected void minScanner() {
-		LOG.debug("minScanner");
+		LOG.debug("minScanner"+System.currentTimeMillis());
 	}
 
 	@Scheduled(cron = "0 0/10 *  * * ? ")
 	protected void tenMinScanner() {
-		LOG.debug("tenMinScanner");
+		LOG.debug("tenMinScanner"+System.currentTimeMillis());
 	}
 
 	@Scheduled(cron = "0 0/30 *  * * ? ")
 	protected void halfHourScanner() {
-		LOG.debug("halfHourScanner");
+		LOG.debug("halfHourScanner"+System.currentTimeMillis());
 	}
 
 	@Scheduled(cron = "0 0 0/1  * * ? ")
 	protected void hourScanner() {
-		LOG.debug("hourScanner");
+		LOG.debug("hourScanner"+System.currentTimeMillis());
 	}
 
 	@Scheduled(cron = "0 0 0 0/1 * ? ")
 	protected void daylyScanner() {
-		LOG.debug("daylyScanner");
+		LOG.debug("daylyScanner"+System.currentTimeMillis());
 	}
 
 }
